@@ -69,6 +69,6 @@ class CastsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cast_params
-      params[:cast]
+       params.require(:cast).permit(:id,:name)
     end
 end

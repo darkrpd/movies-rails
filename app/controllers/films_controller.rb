@@ -1,6 +1,6 @@
 class FilmsController < ApplicationController
   before_action :set_film, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_cast, only: [:show, :edit, :update, :destroy]
   # GET /films
   # GET /films.json
   def index
@@ -10,11 +10,13 @@ class FilmsController < ApplicationController
   # GET /films/1
   # GET /films/1.json
   def show
+    # @casts=Cast.all
   end
 
   # GET /films/new
   def new
     @film = Film.new
+   @casts = Cast.all
   end
 
   # GET /films/1/edit
@@ -25,7 +27,8 @@ class FilmsController < ApplicationController
   # POST /films.json
   def create
     @film = Film.new(film_params)
-
+    @film = Film.create(film_params)
+    
     respond_to do |format|
       if @film.save
         format.html { redirect_to @film, notice: 'Film was successfully created.' }
@@ -65,6 +68,10 @@ class FilmsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_film
       @film = Film.find(params[:id])
+    end
+
+    def set_cast
+      @cast = Cast.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -2,4 +2,13 @@
 
 <%= render 'form' %>
 
+<h1>Choose cast</h1>
+
+<% @casts.each do |casts| %>
+  <tr>
+    <td><%= casts.name %></td>
+  </tr>
+<% end %>
+
+
 <%= link_to 'Back', films_path %>
