@@ -7,6 +7,7 @@ class Ability
         can :manage, :all
         can :access, :rails_admin
        else
+         can :like, Film
          can :read, :all
       end
 

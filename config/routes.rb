@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :casts
   resources :actors
-  resources :films
+  resources :films do
+    member do
+      put 'like', to: 'films#like'
+      put 'dislike', to: 'films#dislike'
+    end
+  end
   devise_for :users
     root to: "home#index"
 

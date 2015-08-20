@@ -1,5 +1,7 @@
 class FilmsController < ApplicationController
   load_and_authorize_resource
+  #skip_authorization_check :only => [:like, :dislike]
+
   before_action :set_film, only: [:show, :edit, :update, :destroy]
   # before_action :set_cast, only: [:show, :edit, :update, :destroy]
   # GET /films
@@ -87,6 +89,22 @@ class FilmsController < ApplicationController
       format.html { redirect_to films_url, notice: 'Film was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+
+  def like
+    @user=current_user
+    @film= Film.find(params[:id])
+    @film.upvote_by @user
+    redirect_to films_path
+
+  end
+
+  def dislike
+    @user=current_user
+    @film= Film.find(params[:id])
+    @film.downvote_by @user
+    redirect_to links_path
   end
 
   private

@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'devise'
 gem 'rails_admin'
 gem 'cancancan', '~> 1.10'
-
+gem 'acts_as_votable', '~> 0.10.0'
 
 gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
