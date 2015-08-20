@@ -25,7 +25,7 @@
 
   <div class="field">
     <% @casts.each do |cast| %>
-      <input type="checkbox" name="cast_ids[]" value="<%= cast.id %>"/>
+      <input type="checkbox" name="actor_ids[]" value="<%= cast.id %>"/>
       <%= f.label cast.name %>
     <% end %>
   </div>

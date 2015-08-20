@@ -21,6 +21,7 @@ class FilmsController < ApplicationController
 
   # GET /films/1/edit
   def edit
+    @casts = Cast.all
   end
 
   # POST /films
@@ -29,7 +30,7 @@ class FilmsController < ApplicationController
     # @film = Film.new(film_params)
      @film = Film.create(film_params)
 
-    params[:cast_ids].each do |cast_id|
+    params[:actor_ids].each do |cast_id|
       FilmActor.create(film_id: @film.id, cast_id: cast_id)
     end
 
@@ -51,6 +52,21 @@ class FilmsController < ApplicationController
   # PATCH/PUT /films/1
   # PATCH/PUT /films/1.json
   def update
+
+      @film.actors.destroy_all
+      @film.directors.destroy_all
+
+      params[:actor_ids].each do |cast_id|
+        FilmActor.create(film_id: @film.id, cast_id: cast_id)
+      end
+
+      params[:director_ids].each do |cast_id|
+        FilmDirector.create(film_id: @film.id, cast_id: cast_id)
+      end
+
+
+
+
     respond_to do |format|
       if @film.update(film_params)
         format.html { redirect_to @film, notice: 'Film was successfully updated.' }
