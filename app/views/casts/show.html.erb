@@ -21,5 +21,12 @@
   </tr>
 <% end %>
 </p>
-<%= link_to 'Edit', edit_cast_path(@cast) %> |
+
+<% if can? :edit, @cast %>
+  <%= link_to 'Edit', edit_cast_path(@cast) %> |
+<% end %>
+ </br>
+
+
+
 <%= link_to 'Back', casts_path %>
