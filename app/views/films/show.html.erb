@@ -15,13 +15,22 @@
   <%= @film.details %>
 </p>
 
-<p>
-  <strong>cast:</strong>
-  <%= @cast.name %>
+
+<p><strong>cast:</strong>
+<% @film.actors.each do |film| %>
+  <tr>
+    <td><%= film.name %></td>
+  </tr>
+<% end %>
 </p>
 
-
-
+<p><strong>director:</strong>
+<% @film.directors.each do |film| %>
+  <tr>
+    <td><%= film.name %></td>
+  </tr>
+<% end %>
+</p>
 
 <%= link_to 'Edit', edit_film_path(@film) %> |
 <%= link_to 'Back', films_path %>

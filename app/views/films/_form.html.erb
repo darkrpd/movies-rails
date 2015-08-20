@@ -20,6 +20,7 @@
     <%= f.label :details %><br>
     <%= f.text_field :details %>
   </div>
+
   <h1>Choose cast</h1>
 
   <div class="field">
@@ -29,7 +30,13 @@
     <% end %>
   </div>
 
-
+  <h1>Choose directors </h1>
+  <div class="field">
+    <% @casts.each do |cast| %>
+      <input type="checkbox" name="director_ids[]" value="<%= cast.id %>"/>
+      <%= f.label cast.name %>
+    <% end %>
+  </div>
 
   <div class="actions">
     <%= f.submit %>

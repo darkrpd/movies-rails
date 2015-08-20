@@ -1,6 +1,6 @@
 class FilmsController < ApplicationController
   before_action :set_film, only: [:show, :edit, :update, :destroy]
-  before_action :set_cast, only: [:show, :edit, :update, :destroy]
+  # before_action :set_cast, only: [:show, :edit, :update, :destroy]
   # GET /films
   # GET /films.json
   def index
@@ -26,9 +26,17 @@ class FilmsController < ApplicationController
   # POST /films
   # POST /films.json
   def create
-    @film = Film.new(film_params)
-    @film = Film.create(film_params)
-    
+    # @film = Film.new(film_params)
+     @film = Film.create(film_params)
+
+    params[:cast_ids].each do |cast_id|
+      FilmActor.create(film_id: @film.id, cast_id: cast_id)
+    end
+
+    params[:director_ids].each do |cast_id|
+      FilmDirector.create(film_id: @film.id, cast_id: cast_id)
+    end
+
     respond_to do |format|
       if @film.save
         format.html { redirect_to @film, notice: 'Film was successfully created.' }
@@ -69,13 +77,13 @@ class FilmsController < ApplicationController
     def set_film
       @film = Film.find(params[:id])
     end
-
-    def set_cast
-      @cast = Cast.find(params[:id])
-    end
+    #
+    # def set_cast
+    #   @cast = Cast.find(params[:id])
+    # end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def film_params
-      params.require(:film).permit(:id, :name, :details)
+      params.require(:film).permit(:id, :name, :details )
     end
 end

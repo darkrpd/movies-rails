@@ -1,6 +1,6 @@
 class CastsController < ApplicationController
   before_action :set_cast, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_film, only: [:show, :edit, :update, :destroy]
   # GET /casts
   # GET /casts.json
   def index
@@ -65,6 +65,10 @@ class CastsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_cast
       @cast = Cast.find(params[:id])
+    end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_film
+      @film = Film.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
