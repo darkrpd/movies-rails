@@ -1,25 +1,38 @@
-<%= form_for(@cast) do |f| %>
-  <% if @cast.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@cast.errors.count, "error") %> prohibited this cast from being saved:</h2>
+<%= form_for @cast, :html => { :class => "form-horizontal cast" } do |f| %>
 
-      <ul>
-      <% @cast.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @cast.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@cast.errors.count, "error") %> prohibited this cast from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @cast.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@cast[:name]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :cast_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :cast_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@cast[:cast_id]) %>
   </div>
 
 
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            casts_path, :class => 'btn btn-default' %>
 
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

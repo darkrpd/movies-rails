@@ -1,29 +1,38 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Casts</h1>
-
-<table>
+<%- model_class = Cast -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:cast_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @casts.each do |cast| %>
       <tr>
+        <td><%= link_to cast.id, cast_path(cast) %></td>
         <td><%= cast.name %></td>
-        <td><%= link_to 'Show', cast %></td>
-        <td><%= link_to 'Edit', edit_cast_path(cast) %></td>
-        <td><%= link_to 'Destroy', cast, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <!-- <form method="get" action=>
-    <button type="submit">Continue</button>
-        </form> -->
+        <td><%= cast.cast_id %></td>
+        <td><%=l cast.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_cast_path(cast), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      cast_path(cast),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Cast', new_cast_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_cast_path,
+            :class => 'btn btn-primary' %>

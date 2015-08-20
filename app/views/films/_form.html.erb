@@ -1,44 +1,55 @@
-<%= form_for(@film) do |f| %>
-  <% if @film.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@film.errors.count, "error") %> prohibited this film from being saved:</h2>
+<%= form_for @film, :html => { :class => "form-horizontal film" } do |f| %>
 
-      <ul>
-      <% @film.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @film.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@film.errors.count, "error") %> prohibited this film from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @film.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@film[:name]) %>
   </div>
-  <div class="field">
-    <%= f.label :details %><br>
-    <%= f.text_field :details %>
-  </div>
-
-  <h1>Choose cast</h1>
-
-  <div class="field">
-    <% @casts.each do |cast| %>
-      <input type="checkbox" name="actor_ids[]" value="<%= cast.id %>"/>
-      <%= f.label cast.name %>
-    <% end %>
+  <div class="control-group">
+    <%= f.label :details, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :details, :class => 'form-control' %>
+    </div>
+    <%= error_span(@film[:details]) %>
   </div>
 
   <h1>Choose directors </h1>
-  <div class="field">
+  <div class="control-group">
     <% @casts.each do |cast| %>
       <input type="checkbox" name="director_ids[]" value="<%= cast.id %>"/>
       <%= f.label cast.name %>
     <% end %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+    <h1>Choose actors </h1>
+    <div class="control-group">
+      <% @casts.each do |cast| %>
+        <input type="checkbox" name="actor_ids[]" value="<%= cast.id %>"/>
+        <%= f.label cast.name %><br>
+      <% end %>
+    </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            films_path, :class => 'btn btn-default' %>
+
 <% end %>

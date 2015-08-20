@@ -5,6 +5,15 @@ gem 'rails_admin'
 gem 'cancancan', '~> 1.10'
 gem 'acts_as_votable', '~> 0.10.0'
 
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails"
+
+
+
+
+
+
 gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
