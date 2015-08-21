@@ -32,20 +32,24 @@
 
   <h1>Choose directors </h1>
   <div class="control-group">
-    <% @casts.each do |cast| %>
-      <input type="checkbox" name="director_ids[]" value="<%= cast.id %>"/>
-      <%= f.label cast.name %>
-    <% end %>
+    <%= f.collection_check_boxes(:director_ids, @casts, :id, :name) %>
   </div>
 
 
     <h1>Choose actors </h1>
     <div class="control-group">
-      <% @casts.each do |cast| %>
-        <input type="checkbox" name="actor_ids[]" value="<%= cast.id %>"/>
-        <%= f.label cast.name %><br>
-      <% end %>
+      <%= f.collection_check_boxes(:actor_ids, @casts, :id, :name) %>
     </div>
+
+    <!-- <h1>Choose role </h1>
+    <div class="control-group">
+      <% @filmactors.each do |filmactor| %>
+
+        <%= f.label filmactor %><br>
+      <% end %>
+    </div> -->
+
+
 
 
   <%= f.submit nil, :class => 'btn btn-primary' %>

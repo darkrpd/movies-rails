@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820091505) do
+ActiveRecord::Schema.define(version: 20150820164610) do
 
   create_table "casts", force: :cascade do |t|
     t.string   "name"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20150820091505) do
   create_table "film_actors", force: :cascade do |t|
     t.integer "film_id"
     t.integer "cast_id"
+    t.string  "role"
   end
 
   create_table "film_directors", force: :cascade do |t|

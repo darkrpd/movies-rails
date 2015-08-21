@@ -20,6 +20,7 @@ class FilmsController < ApplicationController
   def new
     @film = Film.new
    @casts = Cast.all
+   @filmactors = FilmActor.all
   end
 
   # GET /films/1/edit
@@ -31,15 +32,7 @@ class FilmsController < ApplicationController
   # POST /films.json
   def create
     # @film = Film.new(film_params)
-     @film = Film.create(film_params)
-
-    params[:actor_ids].each do |cast_id|
-      FilmActor.create(film_id: @film.id, cast_id: cast_id)
-    end
-
-    params[:director_ids].each do |cast_id|
-      FilmDirector.create(film_id: @film.id, cast_id: cast_id)
-    end
+    @film = Film.create(film_params)
 
     respond_to do |format|
       if @film.save
@@ -55,21 +48,6 @@ class FilmsController < ApplicationController
   # PATCH/PUT /films/1
   # PATCH/PUT /films/1.json
   def update
-
-      @film.actors.destroy_all
-      @film.directors.destroy_all
-
-      params[:actor_ids].each do |cast_id|
-        FilmActor.create(film_id: @film.id, cast_id: cast_id)
-      end
-
-      params[:director_ids].each do |cast_id|
-        FilmDirector.create(film_id: @film.id, cast_id: cast_id)
-      end
-
-
-
-
     respond_to do |format|
       if @film.update(film_params)
         format.html { redirect_to @film, notice: 'Film was successfully updated.' }
@@ -111,7 +89,10 @@ class FilmsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_film
       @film = Film.find(params[:id])
+      @filmactors= FilmActor.all
     end
+
+
     #
     # def set_cast
     #   @cast = Cast.find(params[:id])
@@ -119,6 +100,6 @@ class FilmsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def film_params
-      params.require(:film).permit(:id, :name, :details )
+      params.require(:film).permit(:id, :name, :details, director_ids:[], actor_ids: [] )
     end
 end

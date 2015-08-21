@@ -15,8 +15,21 @@
     </tr>
   <% end %>
 </dd>
+  <dt><strong><%= model_class.human_attribute_name(:director) %>:</strong></dt>
+<dd><% @film.directors.each do |film| %>
+  <tr>
+    <td><%= film.name %></td><br>
+  </tr>
+<% end %>
+</dd>
+
+
+
+
 
 </dl>
+
+
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               films_path, :class => 'btn btn-default'  %>
